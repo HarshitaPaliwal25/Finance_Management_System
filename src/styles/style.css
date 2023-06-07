@@ -1,0 +1,48 @@
+/* .Layout{
+    padding:2rem;
+    height:50%;
+     width:100%;
+      display:flex;
+     gap:2rem;
+     border:2px solid grey;
+} */
+.App{
+    position:relative;
+}
+.bottom_container{
+    background: rgba(137, 155, 168, 0.3) ;
+    position:relative;
+    height:150vh;
+    border:2px solid black;
+}
+.container{
+    border:1px solid #6c6464; 
+    flex:1;
+    backdrop-filter:blur(4.5px);
+    border-radius:12px;
+    /* overflow:auto;
+   
+    overflow-x:hidden; */
+    margin-left:30%;
+    padding:12 32px;
+    margin-top:40px;
+    height:auto;
+    width:120vh;
+    /* &::-webkit-scrollbar{
+        width: 0;
+    } */
+}
+.submit-btn{
+    color:green;
+}
+/* .top_container{
+    border:2px solid grey;
+
+    background-color: rgb(215, 236, 250);
+    
+    .img{
+        height:15vh;
+    }
+} */
+
+  
