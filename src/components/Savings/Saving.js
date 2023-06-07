@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { useEffect, useState } from "react";
-//import {useNavigate} from "react-router-dom"
+import { useState } from "react";
+import {useNavigate} from "react-router-dom"
 import axios from "axios";
 const AlertStyled = styled.div`
   background-color: #f8d7da;
@@ -18,30 +18,17 @@ const elementStyle = {
   textAlign: "center",
 };
 
-function Form() {
-  //const navigate = useNavigate()
-  const [tableData, setTableData] = useState([]);
+function Form(){
+  const navigate = useNavigate()
+ // const [tableData, setTableData] = useState([]);
   const [inputState, setInputState] = useState({
-    title: "",
+    userId: "",
+    type: "",
     amount: "",
-    date: "",
-    category: "",
     description: "",
+    createdAt:"",
   });
-  useEffect(() => {
-    fetchData();
-  }, []);
 
-  const fetchData = () => {
-    axios
-      .get("http://localhost:5000/transactions/get-incomes")
-      .then((response) => {
-        setTableData(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  };
   const [showAlert, setShowAlert] = useState(false);
   const handleOnChange = (event) => {
     setInputState({ ...inputState, [event.target.name]: event.target.value });
@@ -52,20 +39,23 @@ function Form() {
 
     if (validateForm()) {
       axios
-        .post("http://localhost:5000/transactions/add-incomes", inputState)
+        .post("", inputState)
         .then((response) => {
-          setTableData((prev) => [...prev, inputState]);
-
+          //setTableData((prev) => [...prev, inputState]);
+         
           console.log("Form Submitted:", inputState);
-          fetchData();
+
           setInputState({
-            title: "",
+            user_Id: "",
+            type: "",
             amount: "",
-            date: "",
-            category: "",
             description: "",
+            createdAt:"",
+           
           });
-          // setUsers((prev)=>[...prev,inputState]);
+          navigate('/Saving_table');
+         // setUsers((prev)=>[...prev,inputState]);
+         
         })
         .catch((error) => {
           console.error("Error submitting form:", error);
@@ -76,14 +66,14 @@ function Form() {
   };
 
   const validateForm = () => {
-    const { title, amount, date, category, description } = inputState;
+    const { userId, type, amount, description, createdAt } = inputState;
 
     if (
-      title.trim() === "" ||
+      userId.trim() === "" ||
+      type.trim() === "" ||
       amount.trim() === "" ||
-      date.trim() === "" ||
-      category.trim() === "" ||
-      description.trim() === ""
+      description.trim() === "" ||
+      createdAt.trim() === ""
     ) {
       return false;
     }
@@ -92,7 +82,7 @@ function Form() {
 
   return (
     <div className="form">
-      <h1 style={elementStyle}>Incomes</h1>
+      <h1 style={elementStyle}>Savings</h1>
       {showAlert && (
         <AlertStyled>
           Please fill in all the fields before submitting!!
@@ -100,14 +90,26 @@ function Form() {
       )}
       <FormStyled onSubmit={handleOnSubmit}>
         <div className="form-group">
-          <label htmlFor="title">Title</label>
+          <label htmlFor="id">User Id</label>
+          <input
+            type="number"
+            className="form-control"
+            id="id"
+            name="userId"
+            placeholder="User Id"
+            value={inputState.userId}
+            onChange={handleOnChange}
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="type">Type</label>
           <input
             type="text"
             className="form-control"
-            id="title"
-            name="title"
-            placeholder="Title"
-            value={inputState.title}
+            id="type"
+            name="type"
+            placeholder="Type"
+            value={inputState.type}
             onChange={handleOnChange}
           />
         </div>
@@ -123,36 +125,7 @@ function Form() {
             onChange={handleOnChange}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            className="form-control"
-            id="date"
-            name="date"
-            placeholder="Date"
-            value={inputState.date}
-            onChange={handleOnChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="category">Category</label>
-          <select
-            className="form-control"
-            id="category"
-            name="category"
-            value={inputState.category}
-            onChange={handleOnChange}
-          >
-            <option value="">Select options</option>
-            <option value="salary">Salary</option>
-
-            <option value="freelancing">Freelancing</option>
-            <option value="investment">Investment</option>
-            <option value="bank">Bank</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
+    
         <div className="form-group">
           <label htmlFor="textarea">Description</label>
           <textarea
@@ -161,6 +134,18 @@ function Form() {
             rows="3"
             onChange={handleOnChange}
           ></textarea>
+           <div className="form-group">
+          <label htmlFor="date">Created At</label>
+          <input
+            type="date"
+            className="form-control"
+            id="date"
+            name="createdAt"
+            placeholder="Date"
+            value={inputState.createdAt}
+            onChange={handleOnChange}
+          />
+        </div>
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
@@ -173,35 +158,8 @@ function Form() {
       bg={'var(--color-accent'}
       color={'#fff'}/> */}
       </FormStyled>
-      <table className="table">
-        <thead className="thead-dark">
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Title</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Date</th>
-            <th scope="col">Category</th>
-            <th scope="col">Description</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
 
-        <tbody>
-          {tableData.map((user, index) => (
-            <tr key={index.id}>
-              <td>{index + 1}</td>
-              <td>{user.title}</td>
-              <td>{user.amount}</td>
-              <td>{user.date}</td>
-              <td>{user.category}</td>
-              <td>{user.description}</td>
-              <td>
-                <button className="btn btn-warning">Edit</button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      
     </div>
   );
 }

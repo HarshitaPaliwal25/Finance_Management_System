@@ -8,6 +8,7 @@
 } */
 .App{
     position:relative;
+    /* background-color: #012169; */
 }
 .bottom_container{
     background: rgba(137, 155, 168, 0.3) ;
@@ -16,13 +17,14 @@
     border:2px solid black;
 }
 .container{
-    border:1px solid #6c6464; 
+    /* border:1px solid #6c6464;  */
     flex:1;
     backdrop-filter:blur(4.5px);
+   /* background-color: #9cb1e2; */
     border-radius:12px;
-    /* overflow:auto;
+    overflow:auto;
    
-    overflow-x:hidden; */
+    overflow-x:hidden;
     margin-left:30%;
     padding:12 32px;
     margin-top:40px;
@@ -45,4 +47,3 @@
     }
 } */
 
-  
