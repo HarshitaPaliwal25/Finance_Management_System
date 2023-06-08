@@ -1,10 +1,11 @@
 import React from "react";
-
+import leftImage from './images/financelogo.png';
 import styled from "styled-components";
 function Nav() {
   return (
     <div className="header">
-      <Navbar className="navbar navbar-expand-lg navbar-dark">
+      <Navbar className="navbar navbar-expand-lg navbar-dark mx-auto">
+        <LeftImage src={leftImage} alt="Left Image" />
         {/* <a className="navbar-brand" href="/">
           Logo
         </a>
@@ -48,11 +49,11 @@ function Nav() {
   );
 }
 const Navbar = styled.nav`
-  background-color: #0047ab;
-  height: 12vh;
-
+  background-color: #002D62;
+  height: 15vh;
   .navbar-brand {
     color: white;
+    align:center;
   }
 
   .nav-link {
@@ -72,5 +73,10 @@ const Navbar = styled.nav`
   .navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
     background-color: #fff;
   }
+`;
+
+const LeftImage = styled.img`
+  height: 80%;
+  margin-right: 20px;
 `;
 export default Nav;

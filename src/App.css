@@ -4,36 +4,39 @@
     background-color: rgb(46, 45, 45);
     height:10vh;
   }
-
-  /* .sidebar {
-    width: 200px;
-    background-color: #f5f5f5;
-    padding: 20px;
-    border:2px solid grey;
-    height:100vh;
-    margin-top:10px;
-  }
-  
-  .logo {
-    font-size: 24px;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  
-  .menu {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .menu-item {
-    padding: 10px;
-    background-color: #fff;
-    border-bottom: 1px solid #ddd;
-    cursor: pointer;
-  }
-  
-  .menu-item:hover {
-    background-color: #f9f9f9;
-  }
-   */
+   /* .Layout{
+    padding:2rem;
+    height:50%;
+     width:100%;
+      display:flex;
+     gap:2rem;
+     border:2px solid grey;
+} */
+.App{
+  position:relative;
+  /* background-color: #012169; */
+}
+.bottom_container{
+  background: rgba(137, 155, 168, 0.3) ;
+  position:relative;
+  height:150vh;
+  border:2px solid black;
+}
+.container{
+  border:1px solid #6c6464; 
+  flex:1;
+  backdrop-filter:blur(4.5px);
+ background-color: #9cb1e2;
+  border-radius:12px;
+  overflow:auto;
+ 
+  overflow-x:hidden;
+  margin-left:30%;
+  padding:12 32px;
+  margin-top:40px;
+  height:auto;
+  width:120vh; 
+  /* &::-webkit-scrollbar{
+      width: 0;
+  }*/
+}

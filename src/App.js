@@ -1,28 +1,28 @@
 import "./App.css";
-import Form from "./Form/Form";
+import Form from "./components/Form/Form";
 import Budget from "./components/Budget/Budget";
- import Expense from "./components/Expenses/Expense";
+import Expense from "./components/Expenses/Expense";
+ import Saving from "./components/Savings/Saving";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Header from "./components/Header";
+// import Header from "./components/Header";
 import Nav from "./components/Nav";
-
 import { Mainlayout } from "./styles/Layout";
 import "./styles/style.css";
-//import Sidebar from "./components/Sidebar";
+//import Sidebar from "./components/Sidebar/Sidebar";
 
 function App() {
   return (
     <>
       <div className="App">
         <div className="main">
-          <Header />
+        
         </div>
         <Nav />
-  <div className="container">
+ 
       
-
+      <div className="container">
           <BrowserRouter>
-      
+            
               <Routes>
                 {/* <Route path="/" element={<Login />} /> */}
 
@@ -30,7 +30,9 @@ function App() {
 
                 <Route path="/Expense" element={<Expense />} />
                 <Route path="/Budget" element={<Budget />} />
+                <Route path="/Saving" element={<Saving />} />
               </Routes>
+              
           </BrowserRouter> 
         </div>
         {/* <div className="container"></div> */}
