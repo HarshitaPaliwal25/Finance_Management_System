@@ -158,7 +158,35 @@ function Form(){
       bg={'var(--color-accent'}
       color={'#fff'}/> */}
       </FormStyled>
+      <table className="table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">User Id</th>
+            <th scope="col">Type</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Description</th>
+            <th scope="col">Created</th>
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
 
+        <tbody>
+          {/* {tableData.map((user, index) => (
+            <tr key={index.id}>
+              <td>{index + 1}</td>
+              <td>{user.title}</td>
+              <td>{user.amount}</td>
+              <td>{user.date}</td>
+              <td>{user.category}</td>
+              <td>{user.description}</td>
+              <td>
+                <button className="btn btn-warning">Edit</button>
+              </td>
+            </tr>
+          ))} */}
+        </tbody>
+      </table>
       
     </div>
   );

@@ -1,38 +1,115 @@
 import React from "react";
 import styled from "styled-components";
 import { useState } from "react";
-const element_style = {
+import {useNavigate} from "react-router-dom"
+import axios from "axios";
+const AlertStyled = styled.div`
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #f5c6cb;
+  border-radius: 4px;
+`;
+
+const elementStyle = {
   fontSize: "2.5rem",
   color: "powderblue",
   textAlign: "center",
 };
-function Expense() {
+
+function Tax(){
+  const navigate = useNavigate()
+ // const [tableData, setTableData] = useState([]);
   const [inputState, setInputState] = useState({
+    userId: "",
     title: "",
     amount: "",
-    type: "",
-    date: "",
-    category: "",
     description: "",
+   
   });
+
+  const [showAlert, setShowAlert] = useState(false);
   const handleOnChange = (event) => {
-    console.log(inputState);
     setInputState({ ...inputState, [event.target.name]: event.target.value });
   };
+
   const handleOnSubmit = (event) => {
     event.preventDefault();
+
+    if (validateForm()) {
+      axios
+        .post("", inputState)
+        .then((response) => {
+          //setTableData((prev) => [...prev, inputState]);
+         
+          console.log("Form Submitted:", inputState);
+
+          setInputState({
+            user_Id: "",
+            title: "",
+            amount: "",
+            description: "",
+           
+          });
+          navigate('/Saving_table');
+         // setUsers((prev)=>[...prev,inputState]);
+         
+        })
+        .catch((error) => {
+          console.error("Error submitting form:", error);
+        });
+    } else {
+      setShowAlert(true);
+    }
   };
+
+  const validateForm = () => {
+    const { userId, title, amount, description} = inputState;
+
+    if (
+      userId.trim() === "" ||
+      title.trim() === "" ||
+      amount.trim() === "" ||
+      description.trim() === "" 
+     
+    ) {
+      return false;
+    }
+    return true;
+  };
+
   return (
     <div className="form">
-      <h1 style={element_style}>Add New Expenses</h1>
+      <h1 style={elementStyle}>Tax</h1>
+      {showAlert && (
+        <AlertStyled>
+          Please fill in all the fields before submitting!!
+        </AlertStyled>
+      )}
       <FormStyled onSubmit={handleOnSubmit}>
+        <div className="form-group">
+          <label htmlFor="id">User Id</label>
+          <input
+            type="number"
+            className="form-control"
+            id="id"
+            name="userId"
+            placeholder="User Id"
+            value={inputState.userId}
+            onChange={handleOnChange}
+          />
+        </div>
         <div className="form-group">
           <label htmlFor="title">Title</label>
           <input
             type="text"
             className="form-control"
             id="title"
+            name="title"
             placeholder="Title"
+            value={inputState.type}
+            onChange={handleOnChange}
           />
         </div>
         <div className="form-group">
@@ -41,47 +118,13 @@ function Expense() {
             type="number"
             className="form-control"
             id="amount"
+            name="amount"
             placeholder="Amount"
+            value={inputState.amount}
             onChange={handleOnChange}
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="amount">Type</label>
-          <input
-            type="text"
-            className="form-control"
-            id="amount"
-            placeholder="Amount"
-            onChange={handleOnChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="date">Date</label>
-          <input
-            type="date"
-            className="form-control"
-            id="date"
-            placeholder="Date"
-            onChange={handleOnChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="category">Category</label>
-          <select
-            className="form-control"
-            id="category"
-            onChange={handleOnChange}
-          >
-            <option value="disabled">Select options</option>
-            <option value="salary">Education</option>
-            <option value="freelancing">Health</option>
-            <option value="investment">Groceries</option>
-            <option value="bank">Clothing</option>
-            <option value="bank">Travelling</option>
-            <option value="other">Other</option>
-          </select>
-        </div>
-
+    
         <div className="form-group">
           <label htmlFor="textarea">Description</label>
           <textarea
@@ -90,6 +133,7 @@ function Expense() {
             rows="3"
             onChange={handleOnChange}
           ></textarea>
+       
         </div>
         <button type="submit" className="btn btn-primary">
           Submit
@@ -106,12 +150,11 @@ function Expense() {
         <thead className="thead-dark">
           <tr>
             <th scope="col">#</th>
+            <th scope="col">User Id</th>
             <th scope="col">Title</th>
             <th scope="col">Amount</th>
-            <th scope="col">Type</th>
-            <th scope="col">Date</th>
-            <th scope="col">Category</th>
             <th scope="col">Description</th>
+           
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -132,6 +175,7 @@ function Expense() {
           ))} */}
         </tbody>
       </table>
+      
     </div>
   );
 }
@@ -180,5 +224,4 @@ const FormStyled = styled.form`
     }
   }
 `;
-
-export default Expense;
+export default Tax;

@@ -126,6 +126,35 @@ function Budget() {
           Add Budget
         </button>
       </FormStyled>
+      <table className="table">
+        <thead className="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Budget Name</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Start Date</th>
+            <th scope="col">End Date</th>
+            
+            <th scope="col">Action</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          {/* {tableData.map((user, index) => (
+            <tr key={index.id}>
+              <td>{index + 1}</td>
+              <td>{user.title}</td>
+              <td>{user.amount}</td>
+              <td>{user.date}</td>
+              <td>{user.category}</td>
+              <td>{user.description}</td>
+              <td>
+                <button className="btn btn-warning">Edit</button>
+              </td>
+            </tr>
+          ))} */}
+        </tbody>
+      </table>
     </div>
   );
 }
